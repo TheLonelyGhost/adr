@@ -5,6 +5,7 @@ import (
 	"os"
 	"path/filepath"
 	"strconv"
+	"strings"
 )
 
 var (
@@ -48,7 +49,7 @@ func isValidConfigDir(targetPath string) bool {
 	if err != nil {
 		return false
 	}
-	if _, err := strconv.ParseUint(string(contents), 10, 16); err != nil {
+	if _, err := strconv.ParseUint(strings.Trim(string(contents), "\t \n"), 10, 16); err != nil {
 		return false
 	}
 
@@ -66,7 +67,7 @@ func isValidConfigDir(targetPath string) bool {
 // is no ancestor containing `.adr/`.
 func FindConfig(startingPath string) (configPath string) {
 	// starting with current directory, walk each parent directory until hit root
-	cursor := startingPath
+	cursor, _ := filepath.Abs(startingPath)
 	for {
 		if cursor == filepath.Dir(cursor) {
 			// if cursor has reached the root directory, pull from global location for user

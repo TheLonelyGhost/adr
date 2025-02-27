@@ -51,6 +51,8 @@ func (a *AdrData) Init() (err error) {
 	if err != nil {
 		return
 	}
+
+	err = os.MkdirAll(a.DecisionsDir(), 0o755)
 	return
 }
 
