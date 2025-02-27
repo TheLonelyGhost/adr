@@ -10,9 +10,9 @@ import (
 var (
 	userHomeDir, _  = os.UserHomeDir()
 	GlobalConfigDir = filepath.Join(userHomeDir, ".adr")
-	defaultTemplate = `# {{.Number}}. {{.Title}}
+	defaultTemplate = `# {{ .Number }}. {{ .Title }}
 
-**Date:** {{.Date}}
+**Date:** {{ now | date "2006-01-02" }}
 
 ## Status
 
