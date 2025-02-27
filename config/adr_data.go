@@ -68,3 +68,9 @@ func (a *AdrData) DecisionsDir() string {
 	}
 	return filepath.Join(a.BaseDir, a.Config.DecisionsDir)
 }
+
+func (a *AdrData) TemplatePath() string {
+	configPath, _ := filepath.Abs(a.ConfigDir)
+
+	return filepath.Join(configPath, "template.md")
+}

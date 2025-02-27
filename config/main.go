@@ -11,7 +11,7 @@ import (
 var (
 	userHomeDir, _  = os.UserHomeDir()
 	GlobalConfigDir = filepath.Join(userHomeDir, ".adr")
-	defaultTemplate = `# {{ .Number }}. {{ .Title }}
+	defaultTemplate = `# {{ .Index }}. {{ title .Title }}
 
 **Date:** {{ now | date "2006-01-02" }}
 
@@ -104,7 +104,7 @@ func Load(configDirPath string) (data *AdrData) {
 		json.Unmarshal(contents, data.Config)
 	}
 	if contents, err := os.ReadFile(filepath.Join(configDirPath, "index")); err == nil {
-		index, err := strconv.ParseUint(string(contents), 10, 16)
+		index, err := strconv.ParseUint(strings.Trim(string(contents), "\t \n"), 10, 16)
 		if err != nil {
 			panic(err)
 		}

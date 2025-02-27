@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"errors"
+	"strconv"
 	"strings"
 
 	"github.com/fatih/color"
@@ -76,7 +77,7 @@ func cmdNewFunc(c *cli.Context) (err error) {
 	if err != nil {
 		return
 	}
-	color.Green("ADR #%s created: %s", adr.Index, adr.Filename())
+	color.Green("ADR #%s created: %s", strconv.FormatUint(uint64(adr.Index), 10), adr.Filename())
 
 	err = cfg.Write()
 	return
