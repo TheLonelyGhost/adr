@@ -50,7 +50,7 @@ func New(cfg *config.AdrData, title string) (adr Decision, err error) {
 
 	log.Printf("Template source: %s\n", cfg.TemplatePath())
 
-	tpl, err := template.New("template.md").Funcs(sprig.FuncMap()).ParseFiles(cfg.TemplatePath())
+	tpl, err := template.New(filepath.Base(cfg.TemplatePath())).Funcs(sprig.FuncMap()).ParseFiles(cfg.TemplatePath())
 	if err != nil {
 		return
 	}
