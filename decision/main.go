@@ -2,7 +2,6 @@ package decision
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -47,8 +46,6 @@ func New(cfg *config.AdrData, title string) (adr Decision, err error) {
 		return
 	}
 	defer f.Close()
-
-	log.Printf("Template source: %s\n", cfg.TemplatePath())
 
 	tpl, err := template.New(filepath.Base(cfg.TemplatePath())).Funcs(sprig.FuncMap()).ParseFiles(cfg.TemplatePath())
 	if err != nil {
